@@ -58,7 +58,7 @@ function main(request)
     if isUser and isPassword then
         is,db = mysql.query().sql("SELECT * FROM `users` WHERE `user`=? AND `password`=?",user,password)
         if is and #db == 1 then
-            is,db = mysql.query().sql("SELECT id,name FROM file WHERE name LIKE ?",'%'..search..'%')
+            is,db = mysql.query().sql("SELECT id,name,artists FROM file WHERE name LIKE ?",'%'..search..'%')
             if is then
                 for k, v in pairs(db) do
                     db[k]["url"] = '/music/download.lua?id='..v["id"]
@@ -78,14 +78,16 @@ function main(request)
                     id=0,
                     name=v.name,
                     url='http://music.163.com/song/media/outer/url?id='..v.id..'.mp3',
-                    picUrl=v.album.picUrl
+                    picUrl=v.album.picUrl,
+                    artists = v.artists[1].name
                 }}
             else
                 data["data"][#data["data"]+1] = {
                     id=0,
                     name=v.name,
                     url='http://music.163.com/song/media/outer/url?id='..v.id..'.mp3',
-                    picUrl=v.album.picUrl
+                    picUrl=v.album.picUrl,
+                    artists=v.artists[1].name
                 }
             end
         end
