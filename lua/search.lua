@@ -52,35 +52,45 @@ function main(request)
         request.Write(json.encode(data))
         return
     end
-    is,db = mysql.query().sql("SELECT id,name FROM file WHERE name LIKE ?",'%'..search..'%')
-    if not is then
-        data["state"] = false
-        request.StatusCode(200)
-        request.Write(json.encode(data))
-        return
-    end
-    if #db >0 then
-        for k, v in pairs(db) do
-            db[k]["url"] = '/music/download.lua?id='..v["id"]
-            db[k]["picUrl"] = ''
+
+    isUser, user =request.Cookie("user")
+    isPassword, password =request.Cookie("password")
+    if isUser and isPassword then
+        is,db = mysql.query().sql("SELECT * FROM `users` WHERE `user`=? AND `password`=?",user,password)
+        if is and #db == 1 then
+            is,db = mysql.query().sql("SELECT id,name FROM file WHERE name LIKE ?",'%'..search..'%')
+            if is then
+                for k, v in pairs(db) do
+                    db[k]["url"] = '/music/download.lua?id='..v["id"]
+                    db[k]["picUrl"] = ''
+                end
+                data["data"] = db
+            end
+
         end
-    else
-        local data = wang_yi(search)
-        if data ~= nil then
-            for k, v in pairs(data) do
-                _db = {
+
+    end
+    local _data = wang_yi(search)
+    if _data ~= nil then
+        for _, v in pairs(_data) do
+            if data.data == nil then
+                data["data"] = {{
+                    id=0,
+                    name=v.name,
+                    url='http://music.163.com/song/media/outer/url?id='..v.id..'.mp3',
+                    picUrl=v.album.picUrl
+                }}
+            else
+                data["data"][#data["data"]+1] = {
                     id=0,
                     name=v.name,
                     url='http://music.163.com/song/media/outer/url?id='..v.id..'.mp3',
                     picUrl=v.album.picUrl
                 }
-                db[k]=_db
             end
         end
     end
-
     data["state"] = true
-    data["data"] = db
     request.StatusCode(200)
     request.Write(json.encode(data))
 end
