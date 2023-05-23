@@ -1,5 +1,14 @@
 function music_mysql()
-    return require("mysql").open("music","MrrBemxPr7WYBTwz","8.210.146.22","3306","音乐")
+    local ini = require("ini")
+    if ini.open("config.ini") then
+        return require("mysql").open(
+                ini.get("mysql","user"),
+                ini.get("mysql","password"),
+                ini.get("mysql","ip"),
+                ini.get("mysql","port"),
+                ini.get("mysql","database")
+        )
+    end
 end
 
 function wang_yi(search)
@@ -53,6 +62,7 @@ function main(request)
     if #db >0 then
         for k, v in pairs(db) do
             db[k]["url"] = '/music/download.lua?id='..v["id"]
+            db[k]["picUrl"] = ''
         end
     else
         local data = wang_yi(search)
@@ -61,7 +71,8 @@ function main(request)
                 _db = {
                     id=0,
                     name=v.name,
-                    url='http://music.163.com/song/media/outer/url?id='..v.id..'.mp3'
+                    url='http://music.163.com/song/media/outer/url?id='..v.id..'.mp3',
+                    picUrl=v.album.picUrl
                 }
                 db[k]=_db
             end
