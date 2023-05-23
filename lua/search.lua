@@ -14,7 +14,7 @@ end
 function wang_yi(search)
     local http = require("http")
     local response, err = http.post("http://music.163.com/api/search/pc",{
-        query="s="..search.."&offset=0&limit=10&type=1",
+        query="s="..search.."&offset=0&limit=30&type=1",
         headers={
             Accept="*/*",
             Host="music.163.com",
