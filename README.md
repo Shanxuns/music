@@ -1,5 +1,5 @@
 # music
->#### 使用LuaWeb开发
+>#### [使用LuaWeb开发](https://github.com/Shanxuns/luaweb)
 
 
 ## GET 登陆
