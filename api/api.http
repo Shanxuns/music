@@ -1,0 +1,36 @@
+### 登陆Query请求
+POST http://127.0.0.1/login.lua?user={{user}}&password={{password}}
+
+### 注册Query请求
+POST http://127.0.0.1/register.lua?user={{user}}&password={{password}}
+
+### 外部搜索
+GET http://127.0.0.1/search.lua?search={{search}}
+
+### 内部+外部搜索
+GET http://127.0.0.1/search.lua?search={{search}}
+Cookie: user={{user}}; password=e10adc3949ba59abbe56e057f20f883e
+
+### 下载文件
+< {%
+    request.variables.set("id", "1")
+%}
+GET http://127.0.0.1/download.lua?id={{id}}
+Cookie: user={{user}}; password=e10adc3949ba59abbe56e057f20f883e
+
+### 上传文件
+POST http://127.0.0.1/upload.lua
+Cookie: user={{user}}; password=e10adc3949ba59abbe56e057f20f883e
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="name"
+Content-Type: text/plain
+
+有何不可
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="有何不可.mp3"
+Content-Type: application/octet-stream
+
+< ./许嵩-有何不可.mp3
+--WebAppBoundary--

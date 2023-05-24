@@ -13,6 +13,7 @@ end
 
 function main(request)
     json = require("json")
+    strings = require("strings")
     data = {}
     is, name = request.PostFormValue("name")
     if not is then
@@ -46,9 +47,10 @@ function main(request)
             is, file = request.FileName("file")
             if is then
                 if file.CDF == "mp3" then
-                    is = request.FileUpdate("file",db[1]["id"]..'_'..name..'_'..db[1]["user"]..'.mp3')
+                    path = strings.md5(tostring(unixNano()))..'.mp3'
+                    is = request.FileUpdate("file",path)
                     if is then
-                        is,id = mysql.exec().sql("INSERT INTO `file` (`id`, `name`, `path`, `artists`) VALUES (null, ?, ?, ?);",name,db[1]["id"]..'_'..name..'_'..db[1]["user"]..'.mp3',db[1]["user"])
+                        is,id = mysql.exec().sql("INSERT INTO `file` (`id`, `name`, `path`, `artists`) VALUES (null, ?, ?, ?);",name,path,db[1]["user"])
                         if not is then
                             data["state"] = false
                             data["msg"] = "上传失败"
