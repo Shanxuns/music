@@ -41,6 +41,8 @@ function main(request)
     end
     isUser, user =request.Cookie("user")
     isPassword, password =request.Cookie("password")
+    print(user)
+    print(password)
     if isUser and isPassword then
         is,db = mysql.query().sql("SELECT * FROM `users` WHERE `user`=? AND `password`=?",user,password)
         if is and #db == 1 then
