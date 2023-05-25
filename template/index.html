@@ -1,99 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
-          name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <link href="https://cdn.jsdelivr.net/npm/uikit@3.2.2/dist/css/uikit.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.2/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.2/dist/js/uikit-icons.min.js"></script>
     <style>
-        :root {
-            --main-color: #F45D5D;
-            --main-background-color: #f1f1f1;
-            --nav-height: 100px;
+        body{
+            background-color: #F45D5D;
         }
-
-        body {
-            background-color: var(--main-color);
-        }
-
-        html {
-            background-color: var(--main-background-color);
-        }
-
-        nav {
-            background-color: var(--main-color);
-        }
-
-        svg {
-            margin-right: 10px;
-        }
-
-        .text {
-            color: white;
-        }
-
-        .search {
-            background-color: white;
-            margin-right: 15px;
-            margin-left: 15px;
-            padding-left: 15px;
-            border-radius: 20px;
-        }
-
-        .input-search {
-            background-color: white;
-            border-radius: 20px;
-            border-style: none;
-            padding-right: 40px;
-        }
-
-        .footer {
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            height: var(--nav-height);
-            left: 0;
-            background-color: var(--main-background-color);
-        }
-
-        .footer main {
-            margin: 10px;
-            background-color: white;
-            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
-            border-radius: calc((var(--nav-height) - 20px) / 2);
-        }
-
-        .circle-image {
-            margin: 5px;
-            width: calc(var(--nav-height) - 30px);
-            height: calc(var(--nav-height) - 30px);
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .name {
-            color: black;
-            font-size: 18px;
-        }
-        .artists {
-            margin-top: 5px;
-            color: #666;
-            font-size: 12px;
-        }
-        .icon {
-            margin: 5px;
-            width: calc(var(--nav-height) - 30px);
-            height: calc(var(--nav-height) - 30px);
+        nav{
+            background-color: #F45D5D;
         }
     </style>
-    <title></title>
 </head>
 <body>
 <nav class="uk-navbar">
     <div class="uk-navbar-left">
-        <div class="uk-navbar-item uk-logo">
-            <svg class="logo" height="32"
+        <div class="uk-navbar-item uk-logo" style="color: white">
+            <svg class="uk-logo" style="margin-right: 10px" height="32"
                  viewBox="0 0 1024 1024" width="32" xmlns="http://www.w3.org/2000/svg">
                 <path d="M455.535372 439.195494a219.30169 219.30169 0 1 1-219.30169 219.30169 219.545358 219.545358 0 0 1 219.30169-219.30169m0-146.201126a365.502816 365.502816 0 1 0 365.502816 365.502816 365.502816 365.502816 0 0 0-365.502816-365.502816z"
                       fill="#ffffff"></path>
@@ -106,41 +31,9 @@
                 <path d="M665.918793 167.188298L605.123491 0.202245l-0.341136-0.097468-137.112289 49.903318 25.658297 70.468943 172.59043 46.71126z"
                       fill="#ffffff"></path>
             </svg>
-            <div class="text">Music</div>
+            Music
         </div>
     </div>
-    <div class="uk-margin uk-navbar-right uk-width-expand search">
-        <form class="uk-search uk-search-default uk-width-1-1">
-            <a class="uk-search-icon-flip" href="" uk-search-icon></a>
-            <label>
-                <input class="uk-input input-search" placeholder="搜索歌名..." type="search">
-            </label>
-        </form>
-    </div>
-</nav>
-
-<nav class="footer">
-    <main class="uk-navbar">
-        <div class="uk-navbar-left">
-            <img alt="Circle Image"
-                 class="circle-image"
-                 src="https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=650&h=433&q=80">
-        </div>
-        <div class="uk-navbar-left uk-navbar-item" style="padding: 0 0 0 5px;">
-            <div>
-                <div class="name">歌曲名</div>
-                <div class="artists">歌手</div>
-            </div>
-        </div>
-        <div class="uk-navbar-right">
-            <svg class="icon" version="1.1"
-                 viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-                <path d="M512 42.666667C252.793333 42.666667 42.666667 252.793333 42.666667 512s210.126667 469.333333 469.333333 469.333333 469.333333-210.126667 469.333333-469.333333S771.206667 42.666667 512 42.666667z m196.546667 500.493333l-266.666667 176A37.333333 37.333333 0 0 1 384 688V336.033333a37.333333 37.333333 0 0 1 57.893333-31.16l266.666667 176a37.333333 37.333333 0 0 1 0 62.32z"
-                      fill="#F45D5D" >
-                </path>
-            </svg>
-        </div>
-    </main>
 </nav>
 </body>
 </html>
