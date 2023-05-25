@@ -42,6 +42,7 @@ function main(request)
                     request.Write(json.encode(data))
                     return
                 end
+                return
             end
         end
     end

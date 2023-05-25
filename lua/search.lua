@@ -61,7 +61,7 @@ function main(request)
             is,db = mysql.query().sql("SELECT id,name,artists FROM file WHERE name LIKE ?",'%'..search..'%')
             if is then
                 for k, v in pairs(db) do
-                    db[k]["url"] = '/music/download.lua?id='..v["id"]
+                    db[k]["url"] = '/download.lua?id='..v["id"]
                     db[k]["picUrl"] = ''
                 end
                 data["data"] = db
