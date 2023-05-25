@@ -14,6 +14,6 @@ end
 
 function main(request)
     request.Template("index.html",{
-        Title="Music",
+        Title="Music Love",
     })
 end
