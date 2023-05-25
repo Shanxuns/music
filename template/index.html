@@ -76,15 +76,25 @@
             color: black;
             font-size: 18px;
         }
+
         .artists {
             margin-top: 5px;
             color: #666;
             font-size: 12px;
         }
+
         .icon {
             margin: 5px;
             width: calc(var(--nav-height) - 30px);
             height: calc(var(--nav-height) - 30px);
+        }
+        .main{
+            background-color: var(--main-background-color);
+            padding: 15px 15px var(--nav-height);
+        }
+        .button{
+            background-color: var(--main-color);
+            border-radius: 10px;
         }
     </style>
     <title></title>
@@ -118,7 +128,28 @@
         </form>
     </div>
 </nav>
-
+<div class="main">
+    <!-- 音乐列表内容将放在这里 -->
+    <ol class="uk-list uk-list-divider">
+        <li>
+            <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div class="uk-width-auto">
+                    <img alt="Circle Image"
+                         class="circle-image"
+                         src="https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=650&h=433&q=80">
+                </div>
+                <div class="uk-width-expand">
+                    <h4 class="uk-margin-remove-bottom">音乐标题</h4>
+                    <p class="uk-margin-remove-top">音乐艺术家</p>
+                </div>
+                <div class="uk-width-auto">
+                    <button class="button uk-button uk-button-primary uk-button-small">播放</button>
+                </div>
+            </div>
+        </li>
+        <!-- 添加更多音乐项 -->
+    </ol>
+</div>
 <nav class="footer">
     <main class="uk-navbar">
         <div class="uk-navbar-left">
@@ -133,14 +164,51 @@
             </div>
         </div>
         <div class="uk-navbar-right">
-            <svg class="icon" version="1.1"
-                 viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-                <path d="M512 42.666667C252.793333 42.666667 42.666667 252.793333 42.666667 512s210.126667 469.333333 469.333333 469.333333 469.333333-210.126667 469.333333-469.333333S771.206667 42.666667 512 42.666667z m196.546667 500.493333l-266.666667 176A37.333333 37.333333 0 0 1 384 688V336.033333a37.333333 37.333333 0 0 1 57.893333-31.16l266.666667 176a37.333333 37.333333 0 0 1 0 62.32z"
-                      fill="#F45D5D" >
-                </path>
-            </svg>
+            <div id="play">
+                <svg class="icon" version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M512 42.666667C252.793333 42.666667 42.666667 252.793333 42.666667 512s210.126667 469.333333 469.333333 469.333333 469.333333-210.126667 469.333333-469.333333S771.206667 42.666667 512 42.666667z m196.546667 500.493333l-266.666667 176A37.333333 37.333333 0 0 1 384 688V336.033333a37.333333 37.333333 0 0 1 57.893333-31.16l266.666667 176a37.333333 37.333333 0 0 1 0 62.32z"
+                          fill="#F45D5D"></path>
+                </svg>
+            </div>
         </div>
     </main>
 </nav>
+<script>
+    const audio = new Audio();
+    let isPlaying = false;
+    const button = document.getElementById('play');
+    button.addEventListener('click', function () {
+        if (isPlaying) {
+            audio.pause();
+            isPlaying = false;
+        } else {
+            audio.play();
+            isPlaying = true;
+        }
+    });
+
+    function load(url) {
+        audio.src = url;
+        audio.load();
+        audio.play();
+    }
+
+    audio.addEventListener('play', function () {
+        button.innerHTML = '<svg t="1685003741039"class="icon"viewBox="0 0 1024 1024"version="1.1"xmlns="http://www.w3.org/2000/svg"><path d="M512 68.191078c-245.204631 0-443.808922 198.60429-443.808922 443.808922s198.60429 443.808922 443.808922 443.808922 443.808922-198.60429 443.808922-443.808922S757.203608 68.191078 512 68.191078zM467.61921 689.523159l-88.76158 0L378.857631 334.476841l88.76158 0L467.61921 689.523159zM645.142369 689.523159l-88.76158 0L556.38079 334.476841l88.76158 0L645.142369 689.523159z"fill="#F45D5D"></path></svg>'
+    });
+
+    audio.addEventListener('pause', function () {
+        button.innerHTML = '<svg class="icon"version="1.1"viewBox="0 0 1024 1024"xmlns="http://www.w3.org/2000/svg"><path d="M512 42.666667C252.793333 42.666667 42.666667 252.793333 42.666667 512s210.126667 469.333333 469.333333 469.333333 469.333333-210.126667 469.333333-469.333333S771.206667 42.666667 512 42.666667z m196.546667 500.493333l-266.666667 176A37.333333 37.333333 0 0 1 384 688V336.033333a37.333333 37.333333 0 0 1 57.893333-31.16l266.666667 176a37.333333 37.333333 0 0 1 0 62.32z"fill="#F45D5D"></path></svg>'
+    });
+    audio.addEventListener('canplaythrough', function () {
+
+    });
+    audio.addEventListener('ended', function () {
+        button.innerHTML = '<svg class="icon"version="1.1"viewBox="0 0 1024 1024"xmlns="http://www.w3.org/2000/svg"><path d="M512 42.666667C252.793333 42.666667 42.666667 252.793333 42.666667 512s210.126667 469.333333 469.333333 469.333333 469.333333-210.126667 469.333333-469.333333S771.206667 42.666667 512 42.666667z m196.546667 500.493333l-266.666667 176A37.333333 37.333333 0 0 1 384 688V336.033333a37.333333 37.333333 0 0 1 57.893333-31.16l266.666667 176a37.333333 37.333333 0 0 1 0 62.32z"fill="#F45D5D"></path></svg>'
+    });
+    audio.addEventListener('error', function () {
+        button.innerHTML = '<svg class="icon"version="1.1"viewBox="0 0 1024 1024"xmlns="http://www.w3.org/2000/svg"><path d="M512 42.666667C252.793333 42.666667 42.666667 252.793333 42.666667 512s210.126667 469.333333 469.333333 469.333333 469.333333-210.126667 469.333333-469.333333S771.206667 42.666667 512 42.666667z m196.546667 500.493333l-266.666667 176A37.333333 37.333333 0 0 1 384 688V336.033333a37.333333 37.333333 0 0 1 57.893333-31.16l266.666667 176a37.333333 37.333333 0 0 1 0 62.32z"fill="#F45D5D"></path></svg>'
+    });
+</script>
 </body>
 </html>
