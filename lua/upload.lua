@@ -1,4 +1,4 @@
-local mysql = require("./mysql")
+local mysql = require("./mysql_config")
 
 function main(request)
     json = require("json")
