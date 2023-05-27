@@ -2,7 +2,7 @@
 >#### [使用LuaWeb开发,感兴趣的可以看看](https://github.com/Shanxuns/luaweb)
 
 ### 启动命令
-```
+```shell
 linux: ./linux_amd64_LuaWeb ./config.ini
 
 windows: ./windows_amd64_LuaWeb.exe ./config.ini
